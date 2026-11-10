@@ -20,10 +20,10 @@ It combines ResNet-50 for visual feature extraction and BERT for text understand
 
 ## Model Architecture
 
-1. Image Processing – ResNet-50 extracts visual features and produces a 512-dimensional feature vector.
-2. Text Processing – BERT extracts semantic text features, which are projected into a 512-dimensional vector.
-3. Feature Fusion – Image and text features are concatenated into a 1,024-dimensional vector.
-4. Classification – Fully connected layers, ReLU activation, dropout, and sigmoid activation generate the prediction.
+1. **Image Processing:** ResNet-50 extracts visual features and produces a 512-dimensional feature vector.
+2. **Text Processing:** BERT extracts semantic text features, which are projected into a 512-dimensional vector.
+3. **Feature Fusion:** Image and text features are concatenated into a 1,024-dimensional vector.
+4. **Classification:** Fully connected layers, ReLU activation, dropout, and sigmoid activation generate the prediction.
 
 ## Application Features
 
@@ -36,14 +36,14 @@ It combines ResNet-50 for visual feature extraction and BERT for text understand
 - View administrator responses.
 
 ### Admin Module
-- Secure administrator login.
+- Administrator login.
 - View and manage registered users.
 - Add and delete FAQs.
 - View user queries and respond to them.
 
 ## Model Evaluation
 
-The project report identifies the following evaluation metrics:
+The project uses the following evaluation metrics:
 
 - Accuracy
 - F1-score
@@ -58,37 +58,51 @@ The project report identifies the following evaluation metrics:
 5. Model training and validation.
 6. Meme prediction through the Flask application.
 
-## Installation
+## Project Structure
 
-Clone the repository:
+```text
+multimodal-hateful-meme-detection/
+│
+├── model/
+│   ├── hateful_meme_resnet_bert.py
+│   ├── accuracy.docx
+│   └── README.md
+│
+├── static/
+│   ├── css/
+│   ├── images/
+│   └── README.md
+│
+├── templates/
+│   ├── Admin/
+│   ├── User/
+│   └── README.md
+│
+├── app.py
+├── database.py
+├── requirements.txt
+├── .gitignore
+└── README.md
+```
+
+## Installation and Setup
+
+### 1. Clone the Repository
 
 ```bash
-git clone YOUR_REPOSITORY_URL
+git clone https://github.com/sanjanacpaw ar03-hash/multimodal-hateful-meme-detection.git
 cd multimodal-hateful-meme-detection
 ```
 
-Install the required dependencies:
+### 2. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Configure the MySQL database using XAMPP and update the database connection settings in the application.
+### 3. Configure MySQL
 
-Run the Flask application using the appropriate entry point:
-
-```bash
-python app.py
-```
-
-## Important Notes
-
-- The pretrained model weights and dataset are not included in this repository.
-- Download or configure the required model and dataset files separately.
-- Configure your local MySQL database before running the application.
-
-## Academic Project
-
-Developed as part of the Master of Computer Applications (MCA) programme, 2025–2026.
-
-**Project Title:** Multimodal Hateful Meme Detection Using ResNet and BERT.
+- Install and start XAMPP.
+- Start the MySQL service.
+- Create and configure the required database.
+- Configure the database connection according to your local environment.
