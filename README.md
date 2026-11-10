@@ -106,3 +106,14 @@ pip install -r requirements.txt
 - Start the MySQL service.
 - Create and configure the required database.
 - Configure the database connection according to your local environment.
+
+## Application Screenshots
+
+### Home Page
+![Home Page](screenshots/Home%20page.jpeg)
+
+### Registration Page
+![Registration Page](screenshots/Registration%20page.jpeg)
+
+### User Login
+![User Login](screenshots/User%20Login.jpeg)
