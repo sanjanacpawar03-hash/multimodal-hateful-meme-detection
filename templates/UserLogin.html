@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block title %}User Login | Hateful Meme Detection{% endblock %}
+
+{% block content %}
+<section class="d-flex align-items-center justify-content-center py-5"
+         style="min-height: calc(100vh - 140px); background: linear-gradient(135deg, #f3effc, #e2d9f3);">
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5">
+        
+        <div class="main-block border-0">
+          
+          <!-- Header -->
+          <div class="text-center mb-4">
+            <div class="d-inline-flex align-items-center justify-content-center mb-3"
+                 style="width:70px; height:70px; border-radius:50%;
+                        background: linear-gradient(45deg, #6f42c1, #8e63ce);">
+              <i class="fas fa-user-lock fa-2x text-white"></i>
+            </div>
+            <h3 class="fw-bold text-primary">User Login</h3>
+            <p class="text-muted mb-0">Secure access to your dashboard</p>
+          </div>
+
+          <!-- Flash Message -->
+          {% if msg %}
+          <div class="alert alert-{{ msg_type }} alert-dismissible fade show text-center" role="alert">
+            {{ msg }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+          {% endif %}
+
+          <!-- Login Form -->
+          <form method="post" action="{{ url_for('userlogin') }}">
+            
+            <div class="mb-3">
+              <label class="form-label fw-semibold text-primary">Email Address</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light-purple border-0">
+                  <i class="fas fa-envelope text-primary"></i>
+                </span>
+                <input type="email"
+                       class="form-control border-0 shadow-sm"
+                       name="email"
+                       placeholder="Enter your email"
+                       required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-semibold text-primary">Password</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light-purple border-0">
+                  <i class="fas fa-lock text-primary"></i>
+                </span>
+                <input type="password"
+                       class="form-control border-0 shadow-sm"
+                       name="password"
+                       placeholder="Enter your password"
+                       required>
+              </div>
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary w-100 py-2 fw-bold mt-3">
+              <i class="fas fa-sign-in-alt me-2"></i> Login
+            </button>
+          </form>
+
+          {% if error %}
+          <div class="alert alert-danger mt-3 text-center">
+            {{ error }}
+          </div>
+          {% endif %}
+
+          <!-- Footer Links -->
+          <div class="text-center mt-4">
+            <span class="text-muted">Don't have an account?</span>
+            <a href="{{ url_for('userregistration') }}"
+               class="fw-bold text-primary ms-1">
+              Register
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
