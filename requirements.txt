@@ -1,0 +1,12 @@
+Flask
+mysql-connector-python
+bcrypt
+Werkzeug
+Pillow
+torch
+torchvision
+transformers
+numpy
+pandas
+scikit-learn
+tqdm
