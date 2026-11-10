@@ -1,0 +1,31 @@
+{% extends "User/UserBase.html" %}
+
+{% block title %}Upload Meme - Hateful Meme Detection{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4 text-purple">Upload Meme for Hateful Detection</h2>
+
+    <form method="POST" action="{{ url_for('upload_meme') }}" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="meme_image" class="form-label">Meme Image</label>
+            <input type="file" class="form-control" id="meme_image" name="meme_image" accept="image/*" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="meme_text" class="form-label">Meme Text</label>
+            <textarea class="form-control" id="meme_text" name="meme_text" rows="2"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-purple">Predict</button>
+    </form>
+
+    {% if result %}
+    <div class="mt-4 alert alert-info">
+        <h5>Prediction Result:</h5>
+        <p><strong>Label:</strong> {{ result.label }}</p>
+        <p><strong>Probability:</strong> {{ result.probability }}%</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

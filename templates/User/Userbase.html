@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{% block title %}User Dashboard - Hateful Meme Detection System{% endblock %}</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    body {
+      background: linear-gradient(120deg, #ede7f6 0%, #d1c4e9 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    nav.navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1030;
+      background: linear-gradient(90deg, #6a1b9a 0%, #8e24aa 100%) !important;
+      box-shadow: 0 2px 12px rgba(106, 27, 154, 0.25);
+    }
+
+    nav.navbar .navbar-brand,
+    nav.navbar .nav-link {
+      color: #fff !important;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      position: fixed;
+      top: 56px;
+      left: 0;
+      height: calc(100vh - 56px);
+      width: 220px;
+      background: #ede7f6;
+      border-right: 2px solid #8e24aa;
+      padding-top: 1rem;
+      transition: all 0.3s ease;
+      z-index: 1020;
+      box-shadow: 2px 0 18px rgba(0, 0, 0, 0.08);
+    }
+
+    #sidebar .nav-link {
+      color: #6a1b9a;
+      font-weight: 500;
+      border-radius: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    #sidebar .nav-link.active,
+    #sidebar .nav-link:hover {
+      background: linear-gradient(90deg, #6a1b9a 0%, #8e24aa 100%);
+      color: #fff !important;
+    }
+
+    /* Content */
+    #content {
+      margin-top: 56px;
+      margin-left: 220px;
+      padding: 2rem;
+      min-height: calc(100vh - 56px);
+    }
+
+    /* Responsive */
+    @media (max-width: 991px) {
+      #sidebar {
+        left: -220px;
+      }
+
+      #sidebar.active {
+        left: 0;
+      }
+
+      #content {
+        margin-left: 0;
+      }
+
+      #sidebarToggle {
+        display: inline-block;
+      }
+    }
+
+    #sidebarToggle {
+      display: none;
+      color: #fff;
+      font-size: 1.5rem;
+      cursor: pointer;
+      margin-right: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(90deg, #6a1b9a 0%, #8e24aa 100%);
+      color: #fff;
+      text-align: center;
+      padding: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+
+  /* Purple button */
+  .btn-purple {
+      background: linear-gradient(90deg, #6a1b9a 0%, #8e24aa 100%);
+      color: white;
+      border: none;
+  }
+
+  .btn-purple:hover {
+      background: linear-gradient(90deg, #5e1590 0%, #7b1fa2 100%);
+      color: white;
+  }
+
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <span id="sidebarToggle" class="d-lg-none">
+        <i class="fas fa-bars"></i>
+      </span>
+
+      <a class="navbar-brand fw-bold" href="{{ url_for('userhome') }}">
+        <i class="fas fa-user-shield me-2"></i>Meme Detector User
+      </a>
+
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('userlogout') }}">
+            <i class="fas fa-sign-out-alt me-1"></i> Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Sidebar -->
+  <nav id="sidebar">
+    <ul class="nav flex-column px-2">
+
+      <li class="nav-item">
+        <a class="nav-link {% if request.endpoint == 'userhome' %}active{% endif %}"
+           href="{{ url_for('userhome') }}">
+          <i class="fas fa-chart-line me-2"></i> Dashboard
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link {% if request.endpoint == 'upload_meme' %}active{% endif %}"
+           href="{{ url_for('upload_meme') }}">
+          <i class="fas fa-upload me-2"></i> Upload Meme
+        </a>
+      </li>
+
+    
+
+      <li class="nav-item">
+        <a class="nav-link {% if request.endpoint == 'userqueries' %}active{% endif %}"
+           href="{{ url_for('userqueries') }}">
+          <i class="fas fa-comments me-2"></i> Contact Admin
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link {% if request.endpoint == 'userfaq' %}active{% endif %}"
+           href="{{ url_for('userfaq') }}">
+          <i class="fas fa-question-circle me-2"></i> FAQ
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+
+  <!-- Content -->
+  <main id="content">
+    {% if msg %}
+      <div class="alert alert-{{ msg_type }} text-center">{{ msg }}</div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Hateful Meme Detection System
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+
+    if (sidebarToggle) {
+      sidebarToggle.onclick = () => sidebar.classList.toggle('active');
+    }
+  </script>
+
+</body>
+</html>
