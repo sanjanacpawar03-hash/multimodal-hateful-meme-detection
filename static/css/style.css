@@ -1,0 +1,57 @@
+/* Gradient backgrounds */
+.gradient-header {
+  background: linear-gradient(135deg, #5f2eea 0%, #00b8a9 100%);
+  color: #f5f5f5;
+}
+
+.gradient-card-border {
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  z-index: 0;
+  background: linear-gradient(135deg, #3a86ff 0%, #8338ec 100%);
+  border-radius: 1rem;
+  filter: blur(6px);
+  opacity: 0.5;
+}
+
+.gradient-card {
+  background: #fff;
+  border-radius: 1rem;
+  z-index: 1;
+  position: relative;
+}
+
+.gradient-circle {
+  background: linear-gradient(135deg, #00b8a9 0%, #5f2eea 100%);
+  width: 60px; height: 60px;
+  line-height: 60px;
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.gradient-btn {
+  background: linear-gradient(90deg, #3a86ff 0%, #00b8a9 100%);
+  color: #fff !important;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  transition: background 0.3s;
+  border-radius: 50rem !important;
+  box-shadow: 0 4px 16px rgba(58,134,255,0.10);
+}
+
+.gradient-btn:hover, .gradient-btn:focus {
+  filter: brightness(1.1);
+}
+
+.form-label-custom {
+  color: #3a86ff;
+}
+
+.link-blue {
+  color: #3a86ff;
+}
+
+.link-purple {
+  color: #8338ec;
+}
