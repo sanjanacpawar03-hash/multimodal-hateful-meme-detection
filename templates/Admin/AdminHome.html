@@ -1,0 +1,111 @@
+{% extends "Admin/AdminBase.html" %}
+{% block title %}Admin Dashboard - Hateful Meme Detection System{% endblock %}
+
+{% block content %}
+<div class="animate__animated animate__fadeIn">
+
+  <!-- Header -->
+  <div class="mb-4">
+    <h2 class="fw-bold text-purple">
+      <i class="fas fa-user-shield me-2"></i>Admin Dashboard
+    </h2>
+    <p class="text-muted mb-0">
+      Administrative overview of the Hateful Meme Detection System
+    </p>
+  </div>
+
+  <!-- Informative Cards -->
+  <div class="row g-4">
+
+    <!-- About System -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center">
+          <div class="rounded-circle p-3 mb-3 mx-auto"
+               style="background:#ede7f6; width:60px; height:60px;">
+            <i class="fas fa-shield-alt fa-2x text-purple"></i>
+          </div>
+          <h6 class="fw-bold">About the System</h6>
+          <p class="text-muted small mb-0">
+            This system identifies and classifies hateful meme content using
+            AI-based image and text analysis.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- What is a Hateful Meme -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center">
+          <div class="rounded-circle p-3 mb-3 mx-auto"
+               style="background:#ede7f6; width:60px; height:60px;">
+            <i class="fas fa-exclamation-triangle fa-2x text-danger"></i>
+          </div>
+          <h6 class="fw-bold">Hateful Memes</h6>
+          <p class="text-muted small mb-0">
+            Memes that promote hate, discrimination, or offensive content
+            against individuals or communities.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Responsibilities -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center">
+          <div class="rounded-circle p-3 mb-3 mx-auto"
+               style="background:#ede7f6; width:60px; height:60px;">
+            <i class="fas fa-user-cog fa-2x text-primary"></i>
+          </div>
+          <h6 class="fw-bold">Admin Role</h6>
+          <p class="text-muted small mb-0">
+            Administrators manage users, respond to queries,
+            maintain FAQs, and ensure ethical system usage.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Detection Process -->
+    <div class="col-md-6 col-lg-3">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body text-center">
+          <div class="rounded-circle p-3 mb-3 mx-auto"
+               style="background:#ede7f6; width:60px; height:60px;">
+            <i class="fas fa-brain fa-2x text-success"></i>
+          </div>
+          <h6 class="fw-bold">Detection Process</h6>
+          <p class="text-muted small mb-0">
+            The system analyzes both visual features and embedded text
+            to determine whether a meme is hateful.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Additional Info Section -->
+  <div class="card border-0 shadow-sm mt-5">
+    <div class="card-body">
+      <h5 class="fw-bold text-purple mb-2">
+        <i class="fas fa-info-circle me-2"></i>Admin Guidelines
+      </h5>
+      <p class="text-muted mb-0">
+        Admins are responsible for monitoring platform usage, addressing
+        user concerns, updating FAQs, and maintaining system integrity.
+        Proper handling of flagged content ensures a safer online environment.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<style>
+.text-purple {
+  color: #4a2d7e;
+}
+</style>
+{% endblock %}

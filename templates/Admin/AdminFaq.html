@@ -1,0 +1,103 @@
+{% extends 'admin/Adminbase.html' %}
+
+{% block title %}Manage FAQs{% endblock %}
+
+{% block content %}
+<div class="animate__animated animate__fadeIn">
+
+  <!-- Page Header -->
+  <div class="card border-0 shadow-sm mb-4"
+       style="background: linear-gradient(135deg,#6f42c1,#8e63ce);">
+    <div class="card-body text-white d-flex justify-content-between align-items-center">
+      <h3 class="fw-bold mb-0">
+        <i class="fas fa-question-circle me-2"></i>Manage FAQs
+      </h3>
+      <span class="badge bg-light text-purple px-3 py-2 fw-semibold">
+        {{ faqs|length if faqs else 0 }} FAQs
+      </span>
+    </div>
+  </div>
+
+  {% if msg %}
+  <div class="alert alert-{{ msg_type }} alert-dismissible fade show shadow-sm">
+    {{ msg }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+  {% endif %}
+
+  <!-- Add New FAQ -->
+  <div class="card border-0 shadow-sm mb-4">
+    <div class="card-header text-white"
+         style="background: linear-gradient(135deg,#6f42c1,#8e63ce);">
+      <strong><i class="fas fa-plus-circle me-2"></i>Add New FAQ</strong>
+    </div>
+    <div class="card-body">
+      <form method="POST">
+        <div class="mb-3">
+          <label for="question" class="form-label fw-semibold text-purple">
+            Question
+          </label>
+          <input type="text" class="form-control" id="question" name="question" required>
+        </div>
+        <div class="mb-3">
+          <label for="answer" class="form-label fw-semibold text-purple">
+            Answer
+          </label>
+          <textarea class="form-control" id="answer" name="answer" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn text-white"
+                style="background:linear-gradient(135deg,#6f42c1,#8e63ce);">
+          <i class="fas fa-plus-circle me-2"></i>Add FAQ
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Existing FAQs -->
+  <div class="card border-0 shadow-sm">
+    <div class="card-header text-white"
+         style="background: linear-gradient(135deg,#6f42c1,#8e63ce);">
+      <strong><i class="fas fa-list me-2"></i>Existing FAQs</strong>
+    </div>
+    <div class="card-body">
+
+      {% if faqs %}
+        {% for faq in faqs %}
+        <div class="p-3 mb-3 rounded border"
+             style="background:#f8f6fc;">
+          <h6 class="fw-bold text-purple">
+            Q{{ loop.index }}. {{ faq.question }}
+          </h6>
+          <p class="mb-2">
+            <strong>Answer:</strong> {{ faq.answer }}
+          </p>
+          <small class="text-muted d-block mb-2">
+            <i class="fas fa-clock me-1"></i>
+            Added on: {{ faq.created_at.strftime('%Y-%m-%d %H:%M:%S') }}
+          </small>
+
+          <form method="POST" onsubmit="return confirm('Delete this FAQ?');">
+            <input type="hidden" name="delete_id" value="{{ faq.id }}">
+            <button type="submit" class="btn btn-sm btn-danger">
+              <i class="fas fa-trash me-1"></i>Delete
+            </button>
+          </form>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="text-center py-4">
+          <i class="fas fa-info-circle fa-2x text-purple mb-2"></i>
+          <p class="text-muted mb-0">No FAQs found.</p>
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+<style>
+.text-purple {
+  color: #6f42c1;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends "Admin/AdminBase.html" %}
+{% block title %}User Queries - Admin Panel{% endblock %}
+
+{% block content %}
+<div class="animate__animated animate__fadeIn">
+
+  <!-- Page Header -->
+  <div class="card border-0 shadow-sm mb-4"
+       style="background: linear-gradient(135deg,#6f42c1,#8e63ce);">
+    <div class="card-body d-flex justify-content-between align-items-center text-white">
+      <h3 class="fw-bold mb-0">
+        <i class="fas fa-comments me-2"></i>User Queries
+      </h3>
+      <span class="badge bg-light text-purple fw-semibold px-3 py-2">
+        {{ queries|length if queries else 0 }} Total
+      </span>
+    </div>
+  </div>
+
+  {% if msg %}
+  <div class="alert alert-{{ msg_type }} alert-dismissible fade show shadow-sm">
+    {{ msg }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  </div>
+  {% endif %}
+
+  {% if queries %}
+  {% for query in queries %}
+  <div class="card border-0 shadow-sm mb-4">
+    
+    <!-- Query Header -->
+    <div class="card-header d-flex justify-content-between align-items-center"
+         style="background:#f4f0fb;">
+      <div>
+        <strong class="text-purple">Query #{{ query.id }}</strong>
+        <div class="small text-muted">
+          <i class="fas fa-user me-1"></i>{{ query.username }} |
+          <i class="fas fa-envelope me-1"></i>{{ query.email }}
+        </div>
+      </div>
+      <span class="badge rounded-pill 
+            {% if query.status == 'answered' %}bg-success{% else %}bg-warning text-dark{% endif %}">
+        {{ query.status|capitalize }}
+      </span>
+    </div>
+
+    <!-- Query Body -->
+    <div class="card-body">
+      <p class="fw-semibold text-purple mb-1">
+        <i class="fas fa-question-circle me-1"></i>User Question
+      </p>
+      <p class="text-muted">{{ query.querytext }}</p>
+
+      <small class="text-muted">
+        <i class="fas fa-clock me-1"></i>
+        Submitted: {{ query.created_at.strftime('%Y-%m-%d %H:%M') if query.created_at else 'N/A' }}
+      </small>
+
+      {% if query.replytext %}
+      <!-- Admin Response -->
+      <hr>
+      <p class="fw-semibold text-success mb-1">
+        <i class="fas fa-reply me-1"></i>Your Response
+      </p>
+      <div class="alert alert-success mb-1">
+        {{ query.replytext }}
+      </div>
+     
+
+      {% else %}
+      <!-- Response Form -->
+      <hr>
+      <form method="POST" class="mt-3">
+        <input type="hidden" name="query_id" value="{{ query.id }}">
+
+        <label class="form-label fw-semibold text-purple">
+          <i class="fas fa-pen me-1"></i>Write Response
+        </label>
+        <textarea class="form-control mb-3"
+                  name="admin_response"
+                  rows="4"
+                  placeholder="Type your response here..."
+                  required></textarea>
+
+        <button type="submit" class="btn text-white"
+                style="background:linear-gradient(135deg,#6f42c1,#8e63ce);">
+          <i class="fas fa-paper-plane me-2"></i>Send Response
+        </button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+
+  {% else %}
+  <!-- Empty State -->
+  <div class="card border-0 shadow-sm">
+    <div class="card-body text-center py-5">
+      <i class="fas fa-inbox fa-4x mb-3 text-purple"></i>
+      <h5 class="fw-bold">No User Queries</h5>
+      <p class="text-muted mb-0">
+        Queries submitted by users will appear here.
+      </p>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+<style>
+.text-purple {
+  color: #6f42c1;
+}
+</style>
+
+{% endblock %}
